@@ -1,4 +1,9 @@
 import 'package:ecommerce_app/Screens/Home/home_screen.dart';
+import 'package:ecommerce_app/Screens/cart/cart_screen.dart';
+import 'package:ecommerce_app/Screens/catalog/catalog_screen.dart';
+import 'package:ecommerce_app/Screens/product/product_screen.dart';
+import 'package:ecommerce_app/Screens/wishlist/wishlist_screen.dart';
+
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -12,7 +17,14 @@ class AppRouter {
       // ignore: no_duplicate_case_values
       case HomeScreen.routeName:
         return HomeScreen.route();
-
+      case CartScreen.routeName:
+        return CartScreen.route();
+      case CatalogScreen.routeName:
+        return CatalogScreen.route();
+      case ProductScreen.routeName:
+        return ProductScreen.route();
+      case WishlistScreen.routeName:
+        return WishlistScreen.route();
       default:
         return _errorRoute();
     }
