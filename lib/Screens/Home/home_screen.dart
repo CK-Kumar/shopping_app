@@ -1,5 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
+import '../../models/category_model.dart';
+import '../../widgets/hero_carousel_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,9 +16,22 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(title: 'Shopping App'),
-      bottomNavigationBar: CustomNavigationBar(),
+    return Scaffold(
+      appBar: const CustomAppBar(title: 'Shopping App'),
+      bottomNavigationBar: const CustomNavigationBar(),
+      body: Container(
+        child: CarouselSlider(
+          options: CarouselOptions(
+            aspectRatio: 1.5,
+            viewportFraction: 0.9,
+            enlargeCenterPage: true,
+            enlargeStrategy: CenterPageEnlargeStrategy.height,
+          ),
+          items: Category.categories
+              .map((category) => HeroCarouselCard(category: category))
+              .toList(),
+        ),
+      ),
     );
   }
 }
