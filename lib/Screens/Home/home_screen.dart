@@ -1,4 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_app/models/product_model.dart';
+import 'package:ecommerce_app/widgets/product_card.dart';
+import 'package:ecommerce_app/widgets/section_title.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -19,18 +22,38 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Shopping App'),
       bottomNavigationBar: const CustomNavigationBar(),
-      body: Container(
-        child: CarouselSlider(
-          options: CarouselOptions(
-            aspectRatio: 1.5,
-            viewportFraction: 0.9,
-            enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.height,
+      body: Column(
+        children: [
+          CarouselSlider(
+            options: CarouselOptions(
+              aspectRatio: 1.5,
+              viewportFraction: 0.9,
+              enlargeCenterPage: true,
+              enlargeStrategy: CenterPageEnlargeStrategy.height,
+            ),
+            items: Category.categories
+                .map((category) => HeroCarouselCard(category: category))
+                .toList(),
           ),
-          items: Category.categories
-              .map((category) => HeroCarouselCard(category: category))
-              .toList(),
-        ),
+          const SectionTitle(title: 'RECOMMENDED'),
+          //Product card
+          // ProductCard(
+          //   product: Product.products[0],
+          // ),
+          SizedBox(
+            height: 165,
+            child: ListView.builder(
+              shrinkWrap: true,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              itemCount: Product.products.length,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(right: 5.0),
+                child: ProductCard(product: Product.products[index]),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
