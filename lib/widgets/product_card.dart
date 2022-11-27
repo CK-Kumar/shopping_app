@@ -4,7 +4,9 @@ import '../models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
-  const ProductCard({Key? key, required this.product}) : super(key: key);
+  final double widthFactor;
+  const ProductCard({Key? key, required this.product, this.widthFactor = 2.5})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +17,14 @@ class ProductCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 2,
           height: 150,
           child: Image.network(
-            Product.products[0].imageUrl,
+            product.imageUrl,
             fit: BoxFit.cover,
           ),
         ),
         Positioned(
           top: 60,
           child: Container(
-            width: MediaQuery.of(context).size.width / 2.5,
+            width: MediaQuery.of(context).size.width / widthFactor,
             height: 80,
             decoration: BoxDecoration(color: Colors.black.withAlpha(50)),
           ),
@@ -45,7 +47,7 @@ class ProductCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          Product.products[0].name,
+                          product.name,
                           style: Theme.of(context)
                               .textTheme
                               .headline4!
